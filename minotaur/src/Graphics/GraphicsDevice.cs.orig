@@ -1,0 +1,282 @@
+﻿using System;
+using OpenTK.Graphics.OpenGL;
+using System.Collections.Generic;
+using OpenTK;
+using System.Drawing;
+
+namespace Minotaur.Graphics
+{
+  public class GraphicsDevice : IUniformSource
+  {
+    private GameWindow _gameWindow;
+
+    private RenderState _renderState;
+    private Viewport _viewport;
+
+    private int _maxTextureSlots;
+    private int _maxVertexAttributes;
+    private int _maxTextureSize;
+    private int _maxColorAttachments;
+
+    private ICamera _camera;
+    private Matrix4 _viewProjection;
+
+    private VertexAttributeMappings _attributeMappings;
+    private UniformMappings _uniformMappings;
+
+    public RenderState RenderState
+    {
+      get { return _renderState; }
+      set
+      {
+        _renderState.BlendState = value.BlendState;
+        _renderState.DepthState = value.DepthState;
+        _renderState.RasterizerState = value.RasterizerState;
+        _renderState.StencilState = value.StencilState;
+      }
+    }
+
+    public Viewport ViewPort
+    {
+      get { return _viewport; }
+      set { _viewport = value; }
+    }
+
+    public TextureCollection Textures { get; private set; }
+
+    public int MaxTextureSlots { get { return _maxTextureSlots; } }
+
+    public int MaxVertexAttributes { get { return _maxVertexAttributes; } }
+
+    public int MaxTextureSize { get { return _maxTextureSize; } }
+
+    public int MaxColorAttachments { get { return _maxColorAttachments; } }
+
+    public int Width { get { return _gameWindow.ClientSize.Width; } }
+
+    public int Height { get { return _gameWindow.ClientSize.Height; } }
+
+    public ICamera Camera
+    {
+      get { return _camera; }
+      set
+      {
+        _camera = value;
+        _viewProjection = Matrix4.Mult(_camera.View, _camera.Projection);
+      }
+    }
+
+    public Matrix4 ViewProjection
+    {
+      get { return _viewProjection; }
+    }
+
+    public Matrix4 World { get; set; }
+
+    public VertexAttributeMappings AttributeMappings
+    {
+      get { return _attributeMappings; }
+      set { _attributeMappings = value; }
+    }
+
+    public UniformMappings UniformMappings
+    {
+      get { return _uniformMappings; }
+      set { _uniformMappings = value; }
+    }
+
+    public GraphicsStatistics Statistics { get; private set; }
+
+    public GraphicsDevice(Size clientSize)
+    {
+      GL.GetInteger(GetPName.MaxTextureImageUnits, out _maxTextureSlots);
+      Utilities.CheckGLError();
+      GL.GetInteger(GetPName.MaxVertexAttribs, out _maxVertexAttributes);
+      Utilities.CheckGLError();
+      GL.GetInteger(GetPName.MaxTextureSize, out _maxTextureSize);
+      Utilities.CheckGLError();
+      GL.GetInteger(GetPName.MaxColorAttachments, out _maxColorAttachments);
+      Utilities.CheckGLError();
+
+      Textures = new TextureCollection(_maxTextureSlots);
+
+      _viewProjection = Matrix4.Identity;
+      World = Matrix4.Identity;
+
+      _viewport = new Viewport(0, 0, clientSize.Width, clientSize.Height);
+
+      _renderState = new RenderState();
+
+      Statistics = new GraphicsStatistics();
+
+      ResetDefaultMappings();
+    }
+
+    internal void Initialize()
+    {
+      _renderState.BlendState = BlendState.Opaque;
+      _renderState.RasterizerState = RasterizerState.CullCounterClockwise;
+
+      Textures.Clear();
+    }
+
+    public void SetViewport(int x, int y, int width, int height)
+    {
+      _viewport.X = x;
+      _viewport.Y = y;
+      _viewport.Width = width;
+      _viewport.Height = height;
+    }
+
+    public object[] GetRenderTargets()
+    {
+      throw new NotImplementedException();
+    }
+
+    #region Drawing Methods
+
+    public void DrawVertexArray(VertexArray vao, Material material)
+    {
+      foreach (Pass pass in material.Passes)
+      {
+        Statistics.DrawCount++;
+        Statistics.PrimitiveCount = vao.PrimitiveCount(0);
+
+        pass.Apply(this);
+
+        if (pass.Program.UniformMappings == null)
+          pass.Program.UniformMappings = _uniformMappings;
+        pass.Program.Bind();
+        pass.Program.BindUniformSource(this);
+        _attributeMappings.BindAttributes(vao, pass.Program);
+
+        _renderState.Apply(this);
+
+        vao.Bind();
+        GL.DrawElements(vao.VertexBuffer.BeginMode, vao.IndexBuffer.Length, vao.IndexBuffer.ElementsType, IntPtr.Zero);
+      }
+    }
+
+    public void DrawVertexArray(VertexArray vao, int start, int end, Material material)
+    {
+      foreach (Pass pass in material.Passes)
+      {
+        Statistics.DrawCount++;
+        Statistics.PrimitiveCount = vao.PrimitiveCount(start + (end == 0 ? 0 : vao.IndexBuffer.Length - end));
+
+        pass.Apply(this);
+
+        if (pass.Program.UniformMappings == null)
+          pass.Program.UniformMappings = _uniformMappings;
+        pass.Program.Bind();
+        pass.Program.BindUniformSource(this);
+        _attributeMappings.BindAttributes(vao, pass.Program);
+
+        pass.Program.BindUniforms(pass.Parameters);
+
+        
+
+        _renderState.Apply(this);
+
+        vao.Bind();
+        GL.DrawRangeElements(vao.VertexBuffer.BeginMode, start, end == 0 ? vao.IndexBuffer.Length - 1 : end, (end == 0 ? vao.IndexBuffer.Length : end) - start, vao.IndexBuffer.ElementsType, IntPtr.Zero);
+      }
+    }
+
+    public void DrawVertexArray(VertexArray vao, Program program)
+    {
+      Statistics.DrawCount++;
+      Statistics.PrimitiveCount = vao.PrimitiveCount(0);
+      if (program.UniformMappings == null)
+        program.UniformMappings = _uniformMappings;
+      program.Bind();
+      program.BindUniformSource(this);
+      _attributeMappings.BindAttributes(vao, program);
+      Utilities.CheckGLError();
+      _renderState.Apply(this);
+      Utilities.CheckGLError();
+
+      vao.Bind();
+      GL.DrawElements(vao.VertexBuffer.BeginMode, vao.IndexBuffer.Length, vao.IndexBuffer.ElementsType, IntPtr.Zero);
+    }
+
+    public void DrawVertexArray(VertexArray vao, int start, int end, Program program)
+    {
+      Statistics.DrawCount++;
+      Statistics.PrimitiveCount = vao.PrimitiveCount(start + (end == 0 ? 0 : vao.IndexBuffer.Length - end));
+
+      if (program.UniformMappings == null)
+        program.UniformMappings = _uniformMappings;
+      program.Bind();
+      program.BindUniformSource(this);
+      _attributeMappings.BindAttributes(vao, program);
+
+      _renderState.Apply(this);
+
+      vao.Bind();
+      GL.DrawRangeElements(vao.VertexBuffer.BeginMode, start, end == 0 ? vao.IndexBuffer.Length - 1 : end, (end == 0 ? vao.IndexBuffer.Length : end) - start, vao.IndexBuffer.ElementsType, IntPtr.Zero);
+    }
+
+    #endregion
+
+    public void EnsureUniformMappingsForProgram(Program program)
+    {
+      if (program.UniformMappings == null)
+        program.UniformMappings = _uniformMappings;
+    }
+
+    public void ResetDefaultMappings()
+    {
+      _attributeMappings = new VertexAttributeMappings();
+      _attributeMappings.Add("Position", VertexUsage.Position);
+      _attributeMappings.Add("Normal", VertexUsage.Normal);
+      _attributeMappings.Add("Tangent", VertexUsage.Tangent);
+      _attributeMappings.Add("TexCoord", VertexUsage.TextureCoordinate);
+      _attributeMappings.Add("Color", VertexUsage.Color);
+
+      _uniformMappings = new UniformMappings();
+      _uniformMappings.Add("World", UniformUsage.World);
+      _uniformMappings.Add("WorldView", UniformUsage.WorldView);
+      _uniformMappings.Add("WorldViewProj", UniformUsage.WorldViewProj);
+      _uniformMappings.Add("ViewPort", UniformUsage.ViewPort);
+      _uniformMappings.Add("NearFar", UniformUsage.NearFar);
+    }
+
+    public bool GetUniformValue(UniformUsage usage, out IUniformValue value)
+    {
+      value = null;
+      if (usage == UniformUsage.World)
+        value = UniformValue.Create(World);
+      else if (usage == UniformUsage.WorldView)
+      {
+        if (_camera != null)
+          value = UniformValue.Create(Matrix4.Mult(World, _camera.View));
+        else
+          value = UniformValue.Create(World);
+      }
+      else if (usage == UniformUsage.WorldViewProj)
+      {
+        if (_camera != null)
+          value = UniformValue.Create(Matrix4.Mult(World, _viewProjection));
+        else
+          value = UniformValue.Create(World);
+      }
+      else if (usage == UniformUsage.ViewPort)
+      {
+        if (_camera != null)
+          value = UniformValue.Create(_camera.Viewport.GetAsVector4());
+        else
+          value = UniformValue.Create(new Vector4(0, 0, Width, Height));
+      }
+      else if (usage == UniformUsage.NearFar)
+      {
+        if (_camera != null)
+          value = UniformValue.Create(new Vector2(_camera.Near, _camera.Far));
+        else
+          value = UniformValue.Create(new Vector2(1f, 100f));
+      }
+
+      return value != null;
+    }
+  }
+}

@@ -1,0 +1,21 @@
+﻿{
+    "builditems": [{
+    "source": "basic.vert",
+    },
+    {
+    "source": "basic.frag",
+    },
+    {
+    "source": "checkerboard.png",
+    "processor": [{ "PremultiplyAlpha": false, "GenerateMipmaps": false }],
+    },
+    {
+    "source": "cross.png",
+    "processor": [{ "PremultiplyAlpha": false, "GenerateMipmaps": false }],
+    },
+    {
+    "source": "white.png",
+    "processor": [{ "PremultiplyAlpha": false, "GenerateMipmaps": false }],
+    },
+    ],
+}

@@ -1,0 +1,206 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{FF67EC65-25CE-4D6A-8CFE-4E7002BE8863}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Minotaur.Pipeline</RootNamespace>
+    <AssemblyName>Minotaur.Pipeline</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AssimpNet">
+      <HintPath>..\External Resources\AssimpNet.dll</HintPath>
+    </Reference>
+    <Reference Include="fastJSON">
+      <HintPath>..\External Resources\fastJSON.dll</HintPath>
+    </Reference>
+    <Reference Include="FreeImageNET">
+      <HintPath>..\External Resources\FreeImageNET.dll</HintPath>
+    </Reference>
+    <Reference Include="Ionic.Zip">
+      <HintPath>..\External Resources\Ionic.Zip.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net">
+      <HintPath>..\External Resources\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="OpenTK, Version=1.0.0.0, Culture=neutral, PublicKeyToken=bad199fe84eb3df4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\External Resources\OpenTK.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BasicBuildOptions.cs" />
+    <Compile Include="ContentImporter.cs" />
+    <Compile Include="ContentImporterAttribute.cs" />
+    <Compile Include="ContentItem.cs" />
+    <Compile Include="ContentLoadException.cs" />
+    <Compile Include="ContentManager.cs" />
+    <Compile Include="ContentProcessor.cs" />
+    <Compile Include="ContentProcessorAttribute.cs" />
+    <Compile Include="ContentProcessorContext.cs" />
+    <Compile Include="ContentTypeWriter.cs" />
+    <Compile Include="ContentTypeWriterManager.cs" />
+    <Compile Include="ContentWriter.cs" />
+    <Compile Include="BasicFileContentSaver.cs" />
+    <Compile Include="Graphics\BitmapContent.cs" />
+    <Compile Include="Graphics\BoneAnimationsContent.cs" />
+    <Compile Include="Graphics\BoneContent.cs" />
+    <Compile Include="Graphics\ExternalReferenceContent.cs" />
+    <Compile Include="Graphics\SamplerContent.cs" />
+    <Compile Include="Graphics\ShaderSourceContent.cs" />
+    <Compile Include="Graphics\SpriteFontContent.cs" />
+    <Compile Include="Graphics\ImageType.cs" />
+    <Compile Include="Graphics\IndexCollection.cs" />
+    <Compile Include="Graphics\MaterialContent.cs" />
+    <Compile Include="Graphics\MipmapChain.cs" />
+    <Compile Include="Graphics\MipmapChainCollection.cs" />
+    <Compile Include="Graphics\ModelContent.cs" />
+    <Compile Include="Graphics\ModelMeshContent.cs" />
+    <Compile Include="Graphics\ModelMeshPartContent.cs" />
+    <Compile Include="Graphics\SceneContent.cs" />
+    <Compile Include="Graphics\Texture1DContent.cs" />
+    <Compile Include="Graphics\Texture2DContent.cs" />
+    <Compile Include="Graphics\Texture3DContent.cs" />
+    <Compile Include="Graphics\TextureContent.cs" />
+    <Compile Include="Graphics\TextureCubeContent.cs" />
+    <Compile Include="Graphics\TextureType.cs" />
+    <Compile Include="Graphics\UniformValueContent.cs" />
+    <Compile Include="Graphics\VertexAttribute.cs" />
+    <Compile Include="Graphics\VertexBufferContent.cs" />
+    <Compile Include="IBuildOptions.cs" />
+    <Compile Include="IBuildSource.cs" />
+    <Compile Include="IContentImporter.cs" />
+    <Compile Include="IContentProcessor.cs" />
+    <Compile Include="IContentSaver.cs" />
+    <Compile Include="IContentTypeWriter.cs" />
+    <Compile Include="Importers\JsonImporter.cs" />
+    <Compile Include="Importers\ShaderSourceImporter.cs" />
+    <Compile Include="Importers\SpriteFontImporter.cs" />
+    <Compile Include="Importers\ModelImporter.cs" />
+    <Compile Include="Importers\TextureImporter.cs" />
+    <Compile Include="MaterialFactories\IMaterialFactory.cs" />
+    <Compile Include="MaterialFactories\MaterialDefinitionFactory.cs" />
+    <Compile Include="MaterialFactories\MaterialFactoryManager.cs" />
+    <Compile Include="MaterialFactories\PassTemplate.cs" />
+    <Compile Include="MaterialFactories\UniformDefinition.cs" />
+    <Compile Include="Processors\BoneAnimProcessor.cs" />
+    <Compile Include="Processors\JsonMaterialProcessor.cs" />
+    <Compile Include="Processors\PassThroughProcessor.cs" />
+    <Compile Include="StringExtensions.cs" />
+    <Compile Include="Utils\MaterialHelper.cs" />
+    <Compile Include="Utils\ShaderHelper.cs" />
+    <Compile Include="Processors\SpriteFontProcessor.cs" />
+    <Compile Include="Processors\ModelProcessor.cs" />
+    <Compile Include="Processors\TextureProcessor.cs" />
+    <Compile Include="Writers\ArrayWriter.cs" />
+    <Compile Include="Writers\BoneAnimationClipWriter.cs" />
+    <Compile Include="Writers\BoneAnimationWriter.cs" />
+    <Compile Include="Writers\BooleanWriter.cs" />
+    <Compile Include="Writers\BoundingSphereWriter.cs" />
+    <Compile Include="Writers\ByteWriter.cs" />
+    <Compile Include="Writers\CharWriter.cs" />
+    <Compile Include="Writers\ColorWriter.cs" />
+    <Compile Include="Writers\ExternalReferenceWriter.cs" />
+    <Compile Include="Writers\MaterialWriter.cs" />
+    <Compile Include="Writers\ModelMeshPartWriter.cs" />
+    <Compile Include="Writers\ModelMeshWriter.cs" />
+    <Compile Include="Writers\QuaternionKeyWriter.cs" />
+    <Compile Include="Writers\SByteWriter.cs" />
+    <Compile Include="Writers\DateTimeWriter.cs" />
+    <Compile Include="Writers\DecimalWriter.cs" />
+    <Compile Include="Writers\DictionaryWriter.cs" />
+    <Compile Include="Writers\DoubleWriter.cs" />
+    <Compile Include="Writers\EffectMaterialWriter.cs" />
+    <Compile Include="Writers\EffectSourceWriter.cs" />
+    <Compile Include="Writers\EnumWriter.cs" />
+    <Compile Include="Writers\IndexBufferWriter.cs" />
+    <Compile Include="Writers\Int16Writer.cs" />
+    <Compile Include="Writers\Int32Writer.cs" />
+    <Compile Include="Writers\Int64Writer.cs" />
+    <Compile Include="Writers\ListWriter.cs" />
+    <Compile Include="Writers\MatrixWriter.cs" />
+    <Compile Include="Writers\NullableWriter.cs" />
+    <Compile Include="Writers\PlaneWriter.cs" />
+    <Compile Include="Writers\PointWriter.cs" />
+    <Compile Include="Writers\QuaternionWriter.cs" />
+    <Compile Include="Writers\RayWriter.cs" />
+    <Compile Include="Writers\RectangleWriter.cs" />
+    <Compile Include="Writers\ShaderSourceWriter.cs" />
+    <Compile Include="Writers\SingleWriter.cs" />
+    <Compile Include="Writers\SpriteFontWriter.cs" />
+    <Compile Include="Writers\StringWriter.cs" />
+    <Compile Include="Writers\Texture1DWriter.cs" />
+    <Compile Include="Writers\Texture2DWriter.cs" />
+    <Compile Include="Writers\Texture3DWriter.cs" />
+    <Compile Include="Writers\TextureCubeWriter.cs" />
+    <Compile Include="Writers\TimeSpanWriter.cs" />
+    <Compile Include="Writers\UInt16Writer.cs" />
+    <Compile Include="Writers\UInt32Writer.cs" />
+    <Compile Include="Writers\UInt64Writer.cs" />
+    <Compile Include="Writers\UniformValueWriter.cs" />
+    <Compile Include="Writers\UuidWriter.cs" />
+    <Compile Include="Writers\Vector2Writer.cs" />
+    <Compile Include="Writers\Vector3Writer.cs" />
+    <Compile Include="Writers\Vector4Writer.cs" />
+    <Compile Include="Writers\VectorKeyWriter.cs" />
+    <Compile Include="Writers\VertexAttributeWriter.cs" />
+    <Compile Include="Writers\VertexBufferWriter.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Writers\ModelWriter.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="..\External Resources\Assimp32.dll">
+      <Link>Assimp32.dll</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\External Resources\Assimp64.dll">
+      <Link>Assimp64.dll</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\src\Minotaur.csproj">
+      <Project>{51F25038-D856-462D-B7C7-54F2AB4D8A2E}</Project>
+      <Name>Minotaur</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

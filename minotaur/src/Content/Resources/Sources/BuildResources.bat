@@ -1,0 +1,1 @@
+c:\devel\Minotaur\utilities\MinotaurContentBuilder\MinotaurContentBuilder\bin\Debug\MinotaurContentBuilder.exe -f -o c:\devel\Minotaur\src\Content\Resources BuildResources.json

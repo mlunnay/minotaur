@@ -1,0 +1,292 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{51F25038-D856-462D-B7C7-54F2AB4D8A2E}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Minotaur</RootNamespace>
+    <AssemblyName>Minotaur</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="OpenTK, Version=1.0.0.0, Culture=neutral, PublicKeyToken=bad199fe84eb3df4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\External Resources\OpenTK.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Components\Core\GameComponent.cs" />
+    <Compile Include="Components\Core\IBoundable.cs" />
+    <Compile Include="Components\Core\IGameComponent.cs" />
+    <Compile Include="Components\Core\IUpdateable.cs" />
+    <Compile Include="Content\BuiltinContentLoader.cs" />
+    <Compile Include="Content\CallbackContentLoader.cs" />
+    <Compile Include="Content\ContentLoadException.cs" />
+    <Compile Include="Content\ContentManager.cs" />
+    <Compile Include="Content\ContentReader.cs" />
+    <Compile Include="Content\ContentTypeReader.cs" />
+    <Compile Include="Content\ContentTypeReaderManager.cs" />
+    <Compile Include="Content\FileContentLoader.cs" />
+    <Compile Include="Content\IContentLoader.cs" />
+    <Compile Include="Content\Readers\ArrayReader.cs" />
+    <Compile Include="Content\Readers\BoneAnimationClipReader.cs" />
+    <Compile Include="Content\Readers\BooleanReader.cs" />
+    <Compile Include="Content\Readers\BoundingBoxReader.cs" />
+    <Compile Include="Content\Readers\BoundingSphereReader.cs" />
+    <Compile Include="Content\Readers\ByteReader.cs" />
+    <Compile Include="Content\Readers\CharReader.cs" />
+    <Compile Include="Content\Readers\ColorReader.cs" />
+    <Compile Include="Content\Readers\DateTimeReader.cs" />
+    <Compile Include="Content\Readers\DecimalReader.cs" />
+    <Compile Include="Content\Readers\DoubleReader.cs" />
+    <Compile Include="Content\Readers\ExternalReferenceReader.cs" />
+    <Compile Include="Content\Readers\MaterialReader.cs" />
+    <Compile Include="Content\Readers\EnumReader.cs" />
+    <Compile Include="Content\Readers\IndexBufferReader.cs" />
+    <Compile Include="Content\Readers\Int16Reader.cs" />
+    <Compile Include="Content\Readers\Int32Reader.cs" />
+    <Compile Include="Content\Readers\Int64Reader.cs" />
+    <Compile Include="Content\Readers\MatrixReader.cs" />
+    <Compile Include="Content\Readers\ModelReader.cs" />
+    <Compile Include="Content\Readers\NullableReader.cs" />
+    <Compile Include="Content\Readers\PlaneReader.cs" />
+    <Compile Include="Content\Readers\PointReader.cs" />
+    <Compile Include="Content\Readers\QuaternionKeyReader.cs" />
+    <Compile Include="Content\Readers\QuaternionReader.cs" />
+    <Compile Include="Content\Readers\RayReader.cs" />
+    <Compile Include="Content\Readers\RectangleReader.cs" />
+    <Compile Include="Content\Readers\SByteReader.cs" />
+    <Compile Include="Content\Readers\DictionaryReader.cs" />
+    <Compile Include="Content\Readers\ListReader.cs" />
+    <Compile Include="Content\Readers\ShaderSourceReader.cs" />
+    <Compile Include="Content\Readers\SingleReader.cs" />
+    <Compile Include="Content\Readers\SpriteFontReader.cs" />
+    <Compile Include="Content\Readers\StringReader.cs" />
+    <Compile Include="Content\Readers\Texture1DReader.cs" />
+    <Compile Include="Content\Readers\Texture2DReader.cs" />
+    <Compile Include="Content\Readers\Texture3DReader.cs" />
+    <Compile Include="Content\Readers\TextureCubeReader.cs" />
+    <Compile Include="Content\Readers\TimeSpanReader.cs" />
+    <Compile Include="Content\Readers\UInt16Reader.cs" />
+    <Compile Include="Content\Readers\UInt32Reader.cs" />
+    <Compile Include="Content\Readers\UInt64Reader.cs" />
+    <Compile Include="Content\Readers\UniformValueReader.cs" />
+    <Compile Include="Content\Readers\UuidReader.cs" />
+    <Compile Include="Content\Readers\Vector2Reader.cs" />
+    <Compile Include="Content\Readers\Vector3Reader.cs" />
+    <Compile Include="Content\Readers\Vector4Reader.cs" />
+    <Compile Include="Content\Readers\VectorKeyReader.cs" />
+    <Compile Include="Content\Readers\VertexBufferReader.cs" />
+    <Compile Include="Content\Readers\VertexDeclarationReader.cs" />
+    <Compile Include="Core\BoundingBox.cs" />
+    <Compile Include="Core\BoundingSphere.cs" />
+    <Compile Include="Core\ContainmentType.cs" />
+    <Compile Include="Core\DisposalManager.cs" />
+    <Compile Include="Core\GameClock.cs" />
+    <Compile Include="Core\GLException.cs" />
+    <Compile Include="Core\IUpdateable.cs" />
+    <Compile Include="Core\MatrixExtensions.cs" />
+    <Compile Include="Core\Plane.cs" />
+    <Compile Include="Core\Ray.cs" />
+    <Compile Include="Core\ReflectionExtensions.cs" />
+    <Compile Include="Core\ServiceProvider.cs" />
+    <Compile Include="Core\Threading.cs" />
+    <Compile Include="Graphics\Animation\WeightedBoneAnimationController.cs" />
+    <Compile Include="Graphics\DebugBatch.cs" />
+    <Compile Include="Graphics\DepthState.cs" />
+    <Compile Include="Graphics\FPS.cs" />
+    <Compile Include="Graphics\GraphicsStatistics.cs" />
+    <Compile Include="Graphics\Animation\Animation.cs" />
+    <Compile Include="Graphics\Animation\BoneAnimation.cs" />
+    <Compile Include="Graphics\Animation\BoneAnimationControlerBase.cs" />
+    <Compile Include="Graphics\Animation\BoneAnimationController.cs" />
+    <Compile Include="Graphics\Animation\CompressedQuarternionKey.cs" />
+    <Compile Include="Graphics\Animation\CompressedVectorKey.cs" />
+    <Compile Include="Graphics\Animation\IAnimation.cs" />
+    <Compile Include="Graphics\Animation\IBoneAnimationClip.cs" />
+    <Compile Include="Graphics\Animation\IBoneAnimationController.cs" />
+    <Compile Include="Graphics\Animation\IQuaternionKey.cs" />
+    <Compile Include="Graphics\Animation\IVectorKey.cs" />
+    <Compile Include="Graphics\Animation\KeyframeAnimation.cs" />
+    <Compile Include="Graphics\Animation\BoneAnimationClip.cs" />
+    <Compile Include="Graphics\Animation\LookAtController.cs" />
+    <Compile Include="Graphics\Animation\QuaternionKey.cs" />
+    <Compile Include="Graphics\Animation\TimelineAnimation.cs" />
+    <Compile Include="Graphics\Animation\VectorKey.cs" />
+    <Compile Include="Graphics\BitmapFont.cs" />
+    <Compile Include="Graphics\BitmapCharacter.cs" />
+    <Compile Include="Graphics\BitmapCharacterSet.cs" />
+    <Compile Include="Graphics\BlendState.cs" />
+    <Compile Include="Graphics\ColorWriteChannels.cs" />
+    <Compile Include="Graphics\CompileFailedException.cs" />
+    <Compile Include="Graphics\CubeMapFace.cs" />
+    <Compile Include="Graphics\CullMode.cs" />
+    <Compile Include="Graphics\FrameBuffer.cs" />
+    <Compile Include="Graphics\GraphicsDevice.cs" />
+    <Compile Include="Graphics\GraphicsResource.cs" />
+    <Compile Include="Graphics\ICamera.cs" />
+    <Compile Include="Graphics\IndexBuffer.cs" />
+    <Compile Include="Graphics\IPrimitive.cs" />
+    <Compile Include="Graphics\ISprite.cs" />
+    <Compile Include="Graphics\IUniformSource.cs" />
+    <Compile Include="Graphics\IUniformValue.cs" />
+    <Compile Include="Graphics\LinkFailedException.cs" />
+    <Compile Include="Graphics\Material\Material.cs" />
+    <Compile Include="Graphics\Material\Pass.cs" />
+    <Compile Include="Graphics\Material\PassCollection.cs" />
+    <Compile Include="Graphics\Model.cs" />
+    <Compile Include="Graphics\ModelMesh.cs" />
+    <Compile Include="Graphics\ModelMeshPart.cs" />
+    <Compile Include="Graphics\pipeline\commands\BindBufferCommand.cs" />
+    <Compile Include="Graphics\pipeline\commands\ClearTargetCommand.cs" />
+    <Compile Include="Graphics\pipeline\commands\DrawGeometryCommand.cs" />
+    <Compile Include="Graphics\pipeline\commands\DrawQuadCommand.cs" />
+    <Compile Include="Graphics\pipeline\commands\SetUniformCommand.cs" />
+    <Compile Include="Graphics\pipeline\commands\UnbindBufferCommand.cs" />
+    <Compile Include="Graphics\pipeline\commands\SwitchTargetCommand.cs" />
+    <Compile Include="Graphics\pipeline\IPipelineCommand.cs" />
+    <Compile Include="Graphics\pipeline\PipelineCommandAttribute.cs" />
+    <Compile Include="Graphics\pipeline\RenderPipeline.cs" />
+    <Compile Include="Graphics\pipeline\RenderPipelineStage.cs" />
+    <Compile Include="Graphics\Primitives\Arrow.cs" />
+    <Compile Include="Graphics\Primitives\Axis.cs" />
+    <Compile Include="Graphics\Primitives\Box.cs" />
+    <Compile Include="Graphics\Primitives\Grid.cs" />
+    <Compile Include="Graphics\Primitives\PrimitiveBase.cs" />
+    <Compile Include="Graphics\Primitives\AABox.cs" />
+    <Compile Include="Graphics\Primitives\Skeleton.cs" />
+    <Compile Include="Graphics\Primitives\Sphere.cs" />
+    <Compile Include="Graphics\Program.cs" />
+    <Compile Include="Graphics\ProgramAttribute.cs" />
+    <Compile Include="Graphics\ProgramUniform.cs" />
+    <Compile Include="Graphics\RasterizerState.cs" />
+    <Compile Include="Graphics\RenderState.cs" />
+    <Compile Include="Graphics\Sampler.cs" />
+    <Compile Include="Graphics\ScreenAlignedQuad.cs" />
+    <Compile Include="Graphics\SlicedSprite.cs" />
+    <Compile Include="Graphics\SpriteBatch.cs" />
+    <Compile Include="Graphics\SpriteEffect.cs" />
+    <Compile Include="Graphics\StencilState.cs" />
+    <Compile Include="Graphics\Shader.cs" />
+    <Compile Include="Graphics\Skeleton.cs" />
+    <Compile Include="Graphics\Sprite.cs" />
+    <Compile Include="Graphics\SpriteBatcher.cs" />
+    <Compile Include="Graphics\SpriteBatchItem.cs" />
+    <Compile Include="Graphics\SpriteSortMode.cs" />
+    <Compile Include="Graphics\Texture.cs" />
+    <Compile Include="Graphics\Texture1D.cs" />
+    <Compile Include="Graphics\Texture2D.cs" />
+    <Compile Include="Graphics\Texture3D.cs" />
+    <Compile Include="Graphics\TextureAtlas.cs" />
+    <Compile Include="Graphics\TextureCollection.cs" />
+    <Compile Include="Graphics\TextureCube.cs" />
+    <Compile Include="Graphics\UniformMappings.cs" />
+    <Compile Include="Graphics\UniformUsage.cs" />
+    <Compile Include="Graphics\UniformValues\UniformValue.cs" />
+    <Compile Include="Graphics\UniformValues\UniformValueFloat1.cs" />
+    <Compile Include="Graphics\UniformValues\UniformValueFloat2.cs" />
+    <Compile Include="Graphics\UniformValues\UniformValueFloat3.cs" />
+    <Compile Include="Graphics\UniformValues\UniformValueFloat4.cs" />
+    <Compile Include="Graphics\UniformValues\UniformValueInt1.cs" />
+    <Compile Include="Graphics\UniformValues\UniformValueInt2.cs" />
+    <Compile Include="Graphics\UniformValues\UniformValueInt3.cs" />
+    <Compile Include="Graphics\UniformValues\UniformValueInt4.cs" />
+    <Compile Include="Graphics\UniformValues\UniformValueMatrix.cs" />
+    <Compile Include="Graphics\UniformValues\UniformValueSampler.cs" />
+    <Compile Include="Graphics\UniformValues\UniformValueTexture.cs" />
+    <Compile Include="Graphics\UniformValues\UniformValueType.cs" />
+    <Compile Include="Graphics\UniformValues\UniformValueUint1.cs" />
+    <Compile Include="Graphics\UniformValues\UniformValueUint2.cs" />
+    <Compile Include="Graphics\UniformValues\UniformValueUint3.cs" />
+    <Compile Include="Graphics\UniformValues\UniformValueUint4.cs" />
+    <Compile Include="Graphics\Utilities.cs" />
+    <Compile Include="Graphics\VertexArray.cs" />
+    <Compile Include="Graphics\VertexAttribute.cs" />
+    <Compile Include="Graphics\VertexAttributeMappings.cs" />
+    <Compile Include="Graphics\VertexBuffer.cs" />
+    <Compile Include="Graphics\VertexFormat.cs" />
+    <Compile Include="Graphics\VertexPositionColor.cs" />
+    <Compile Include="Graphics\VertexPositionColorTexture.cs" />
+    <Compile Include="Graphics\VertexPositionNormalTexture.cs" />
+    <Compile Include="Graphics\VertexPositionTexture.cs" />
+    <Compile Include="Graphics\VertexUsage.cs" />
+    <Compile Include="Graphics\Viewport.cs" />
+    <Compile Include="Helpers\Hash.cs" />
+    <Compile Include="Helpers\LerpHelper.cs" />
+    <Compile Include="Helpers\QuantizationHelper.cs" />
+    <Compile Include="Helpers\QuaternionHelper.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Components\Camera\" />
+    <Folder Include="Components\Graphics\" />
+    <Folder Include="Components\Logic\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="ComponentKit\ComponentKit.csproj">
+      <Project>{1F5DD5C6-6B92-4F0D-8EC2-1941867082D6}</Project>
+      <Name>ComponentKit</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Content\Resources\Sources\basic.vert" />
+    <None Include="Content\Resources\Sources\basic.frag" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Content\Resources\Sources\checkerboard.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Content\Resources\Sources\cross.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Content\Resources\Sources\basicmaterial.json" />
+    <EmbeddedResource Include="Content\Resources\white.meb" />
+    <EmbeddedResource Include="Content\Resources\basic_frag.meb" />
+    <EmbeddedResource Include="Content\Resources\basic_vert.meb" />
+    <EmbeddedResource Include="Content\Resources\checkerboard.meb" />
+    <EmbeddedResource Include="Content\Resources\cross.meb" />
+    <None Include="Content\Resources\Sources\BuildResources.bat" />
+    <None Include="Content\Resources\Sources\BuildResources.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Content\Resources\Sources\white.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

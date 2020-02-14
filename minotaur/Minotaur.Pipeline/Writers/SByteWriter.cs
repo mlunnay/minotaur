@@ -1,0 +1,18 @@
+using System;
+
+namespace Minotaur.Pipeline.Writers
+{
+  public class SByteWriter : ContentTypeWriter<SByte>
+  {
+    public SByteWriter()
+      : base(new Guid("c8b3b167-d6c3-4ba1-9a58-e3bb1c0c51d4"))
+    {
+      isPrimitiveType = true;
+    }
+
+    public override void Write(ContentWriter writer, SByte value)
+    {
+      writer.Write(value);
+    }
+  }
+}

@@ -1,0 +1,13 @@
+﻿{
+  "name": "BasicMaterial",
+  "passes": [
+    {"vs": "source://basic.vert",
+     "fs": "source://basic.frag",
+     "parameters": {
+      "Texture": "builtin://white.png",
+      "Diffuse": "float(1,1,1,1)"
+     }
+     "comparison": ["Texture"],
+    },
+  ],
+}
